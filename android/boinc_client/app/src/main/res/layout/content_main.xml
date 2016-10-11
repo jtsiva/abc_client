@@ -14,9 +14,16 @@
     tools:showIn="@layout/activity_main"
     tools:context="edu.nd.jsiva.boincclient.MainActivity">
 
-    <TextView
-        android:id="@+id/sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:maxLines="20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/text_field"
+            />
+    </ScrollView>
 </RelativeLayout>

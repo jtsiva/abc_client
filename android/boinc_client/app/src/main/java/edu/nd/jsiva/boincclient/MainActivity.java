@@ -1,6 +1,7 @@
 package edu.nd.jsiva.boincclient;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,7 +11,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
+
+    BoincManager manager = new BoincManager(this);
+    String textContents = new String ("");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +30,40 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Do something?", Snackbar.LENGTH_LONG)
+                        .setAction("Yes", new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                textContents = "";
+                            }
+                        }
+                ).show();
             }
         });
 
-    // Example of a call to a native method
-    TextView tv = (TextView) findViewById(R.id.sample_text);
-    tv.setText(stringFromJNI());
+        manager.init();
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable ()
+                {
+                    public void run () {
+                        TextView tv = (TextView) findViewById(R.id.text_field);
+                        textContents += manager.check();
+                        tv.setText(textContents);
+
+                    }
+                });
+
+            }
+        }, 0, 1000);//put here time 1000 milliseconds=1 second
+
+        // Example of a call to a native method
+        TextView tv = (TextView) findViewById(R.id.text_field);
+        textContents = manager.start() + manager.check();
+        tv.setText(textContents);
     }
 
     @Override
