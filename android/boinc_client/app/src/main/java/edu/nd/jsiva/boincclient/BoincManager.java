@@ -6,8 +6,10 @@ package edu.nd.jsiva.boincclient;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,6 +58,7 @@ public class BoincManager {
             }
 
             nativeOutput = output.toString();
+            Log.v("abc", nativeOutput);
         }
         catch(IOException e)
         {
@@ -74,18 +77,20 @@ public class BoincManager {
 
     public void init ()
     {
-        copyFile ("armeabi-v7a/boinc_client", "/data/data/edu.nd.jsiva.boincclient/nativeFolder/");
-        copyFile ("armeabi-v7a/boinccmd", "/data/data/edu.nd.jsiva.boincclient/nativeFolder/");
+        copyFile ("armeabi-v7a/boinc_client", "/data/data/edu.nd.jsiva.boincclient/boinc_client");
+        run_cmd (true, "/system/bin/chmod 777 /data/data/edu.nd.jsiva.boincclient/boinc_client");
+        copyFile ("armeabi-v7a/boinccmd", "/data/data/edu.nd.jsiva.boincclient/boinccmd");
+        run_cmd (true, "/system/bin/chmod 777 /data/data/edu.nd.jsiva.boincclient/boinccmd");
     }
 
     public String start ()
     {
-        return "start!\n";//return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/nativeFolder/boinc_client --help");
+        return run_cmd(true, "/system/bin/ls -l /data/data/edu.nd.jsiva.boincclient/");//"/data/data/edu.nd.jsiva.boincclient/boinc_client --help");
     }
 
     public String check ()
     {
-        return "check check\n";//return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/nativeFolder/boinccmd --help");
+        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinccmd --help 2>&1");
     }
 
     //exec client

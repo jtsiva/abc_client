@@ -1,0 +1,34 @@
+Incremental java compilation is an incubating feature.
+:app:preBuild UP-TO-DATE
+:app:preDebugBuild UP-TO-DATE
+:app:checkDebugManifest
+:app:preReleaseBuild UP-TO-DATE
+:app:prepareComAndroidSupportAppcompatV71910Library UP-TO-DATE
+:app:prepareDebugDependencies
+:app:compileDebugAidl UP-TO-DATE
+:app:compileDebugRenderscript UP-TO-DATE
+:app:generateDebugBuildConfig UP-TO-DATE
+:app:generateDebugResValues UP-TO-DATE
+:app:generateDebugResources UP-TO-DATE
+:app:mergeDebugResources UP-TO-DATE
+:app:processDebugManifest UP-TO-DATE
+:app:processDebugResourcesC:\Users\ray_donovan\Documents\GitHub\abc_client\android\BOINC\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:67: AAPT: No resource identifier found for attribute 'banner' in package 'android'
+    
+warning: string 'social_invite_content_url' has no default translation.
+C:\Users\ray_donovan\Documents\GitHub\abc_client\android\BOINC\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:67: error: No resource identifier found for attribute 'banner' in package 'android'
+
+
+ FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:processDebugResources'.
+> com.android.ide.common.process.ProcessException: Failed to execute aapt
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 17.675 secs
