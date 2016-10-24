@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-        }, 0, 1000);//put here time 1000 milliseconds=1 second
+        }, 0, 5000);//put here time 1000 milliseconds=1 second
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.text_field);
