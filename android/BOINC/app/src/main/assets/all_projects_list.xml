@@ -21,7 +21,20 @@
       <summary>Analyze images of space</summary>
     </project>
     <project>
-        <name>ATLAS@Home</name>
+        <name>ABC NBody</name>
+        <url>http://52.55.229.250/abcnb</url>
+        <general_area>Physical Science</general_area>
+        <specific_area>Astronomy</specific_area>
+        <description><![CDATA[ABC NBody is a test project that uses an NBody simulation to test out the idea of an Android BOINC Cluster]]></description>
+        <home>University of Notre Dame</home>
+        <platforms>
+            <name>arm-android-linux-gnu[android_arm_pie]</name>
+            <name>i686-pc-linux-gnu</name>
+        </platforms>
+        <summary>Android BOINC Cluster test</summary>
+    </project>
+    <project>
+        <name>aTLAS@Home</name>
         <url>http://atlasathome.cern.ch/</url>
         <general_area>Physical Science</general_area>
         <specific_area>Physics</specific_area>

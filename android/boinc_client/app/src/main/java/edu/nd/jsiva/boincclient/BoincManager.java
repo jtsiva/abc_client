@@ -44,6 +44,7 @@ public class BoincManager {
             Process nativeApp = Runtime.getRuntime().exec(thingToRun);
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(nativeApp.getInputStream()));
+            BufferedReader errReader = new BufferedReader(new InputStreamReader(nativeApp.getErrorStream()));
             int read;
             char[] buffer = new char[4096];
             StringBuffer output = new StringBuffer();
@@ -55,9 +56,17 @@ public class BoincManager {
             // Waits for the command to finish.
             if (wait) {
                 nativeApp.waitFor();
+                nativeOutput = Integer.toString(nativeApp.exitValue());
+                if (0 != nativeApp.exitValue())
+                {
+                    while ((read = errReader.read(buffer)) > 0) {
+                        output.append(buffer, 0, read);
+                    }
+                    errReader.close();
+                }
             }
 
-            nativeOutput = output.toString();
+            nativeOutput += "> " + output.toString();
             Log.v("abc", nativeOutput);
         }
         catch(IOException e)
@@ -85,12 +94,12 @@ public class BoincManager {
 
     public String start ()
     {
-        return run_cmd(true, "/system/bin/ls -l /data/data/edu.nd.jsiva.boincclient/");//"/data/data/edu.nd.jsiva.boincclient/boinc_client --help");
+        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinc_client --no_gui_rpc");
     }
 
     public String check ()
     {
-        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinccmd --help 2>&1");
+        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinccmd --client_version");
     }
 
     //exec client
