@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     public void run () {
                         TextView tv = (TextView) findViewById(R.id.text_field);
-                        textContents += manager.check();
+                        textContents = manager.check();
                         tv.setText(textContents);
 
                     }
@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.text_field);
-        textContents = manager.start() + manager.check();
+        textContents = manager.start();
+        //textContents = manager.check();
         tv.setText(textContents);
     }
 
