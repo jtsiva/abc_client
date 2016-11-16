@@ -5,11 +5,9 @@ package edu.nd.jsiva.boincclient;
  */
 
 import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,8 +38,10 @@ public class BoincManager {
     private static String run_cmd(boolean wait, String thingToRun)
     {
         String nativeOutput = new String("");
+        Process nativeApp;
         try {
-            Process nativeApp = Runtime.getRuntime().exec(thingToRun);
+            nativeApp = Runtime.getRuntime().exec(thingToRun);
+
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(nativeApp.getInputStream()));
             BufferedReader errReader = new BufferedReader(new InputStreamReader(nativeApp.getErrorStream()));
@@ -86,20 +86,22 @@ public class BoincManager {
 
     public void init ()
     {
-        copyFile ("armeabi-v7a/boinc_client", "/data/data/edu.nd.jsiva.boincclient/boinc_client");
-        run_cmd (true, "/system/bin/chmod 777 /data/data/edu.nd.jsiva.boincclient/boinc_client");
-        copyFile ("armeabi-v7a/boinccmd", "/data/data/edu.nd.jsiva.boincclient/boinccmd");
-        run_cmd (true, "/system/bin/chmod 777 /data/data/edu.nd.jsiva.boincclient/boinccmd");
+       // copyFile ("libs/librebound.so", "/data/data/edu.nd.jsiva.boincclient/librebound.so");
+        //run_cmd (true, false, "/system/bin/chmod 777 /data/data/edu.nd.jsiva.boincclient/librebound.so");
+        copyFile ("rebound", "/data/data/edu.nd.jsiva.boincclient/rebound");
+        run_cmd (true, "/system/bin/chmod 755 /data/data/edu.nd.jsiva.boincclient/rebound");
+        copyFile ("sample.txt", "/data/data/edu.nd.jsiva.boincclient/sample.txt");
+        run_cmd (true, "/system/bin/chmod 755 /data/data/edu.nd.jsiva.boincclient/sample.txt");
     }
 
     public String start ()
     {
-        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinc_client --no_gui_rpc");
+        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/rebound /data/data/edu.nd.jsiva.boincclient");
     }
 
     public String check ()
     {
-        return run_cmd(true, "/data/data/edu.nd.jsiva.boincclient/boinccmd --client_version");
+        return run_cmd(true, "ls -l /data/data/edu.nd.jsiva.boincclient/");//res*");
     }
 
     //exec client
