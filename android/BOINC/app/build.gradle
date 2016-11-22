@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "edu.berkeley.boinc"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 24
     }
 
